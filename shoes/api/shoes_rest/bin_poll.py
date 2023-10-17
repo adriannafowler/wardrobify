@@ -6,12 +6,11 @@ import json
 import requests
 
 sys.path.append("")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shoes_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "attendees_bc.settings")
 django.setup()
 
-# Import models from hats_rest, here.
-# from shoes_rest.models import Something
-from api.shoes_rest.models import BinVO
+
+from .models import BinVO
 
 def get_bins():
     url = "http://wardrobe:8100/api/bins/"
@@ -25,13 +24,11 @@ def get_bins():
 
 def poll():
     while True:
-        print('Shoes poller polling for data')
         try:
             get_bins()
-            pass
         except Exception as e:
-            print(e, file=sys.stderr)
-        time.sleep(60)
+            print(e)
+        time.sleep(5)
 
 
 if __name__ == "__main__":
