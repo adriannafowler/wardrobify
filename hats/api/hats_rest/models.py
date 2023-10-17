@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+# class Hats(models.Model):
+#     fabric =
+#     style_name =
+#     color =
+#     picture_url =
+
+#     location =
