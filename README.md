@@ -2,8 +2,8 @@
 
 Team:
 
-* Taylor - Hats
-* Person 2 - Which microservice?
+* Taylor - Hats Test
+* Adrianna Fowler - Shoes
 
 ## Design
 
