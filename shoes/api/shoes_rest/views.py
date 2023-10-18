@@ -15,6 +15,7 @@ class BinVOEncoder(ModelEncoder):
 class ShoesListEncoder(ModelEncoder):
     model = Shoes
     properties = [
+        "id",
         "manufacturer",
         "model_name",
         "color",
@@ -22,9 +23,18 @@ class ShoesListEncoder(ModelEncoder):
     ]
     def get_extra_data(self, o):
         return {"bin": o.bin.import_href}
-    #     "bin"
-    # ]
-    # encoders = {"bin": BinVOEncoder}
+
+class ShoesDetailEncoder(ModelEncoder):
+    model = Shoes
+    properties = [
+        "id",
+        "manufacturer",
+        "model_name",
+        "color",
+        "image",
+    ]
+    def get_extra_data(self, o):
+        return {"bin": o.bin.import_href}
 
 
 @require_http_methods(["GET", "POST"])
@@ -41,7 +51,6 @@ def list_shoes(request, bin_vo_id=None):
         content = json.loads(request.body)
         try:
             bin_href = content["bin"]
-            # bin_href = f"/api/bins/{bin_vo_id}"
             bin = BinVO.objects.get(import_href=bin_href)
             content["bin"] = bin
         except:
@@ -55,3 +64,14 @@ def list_shoes(request, bin_vo_id=None):
             encoder=ShoesListEncoder,
             safe=False
         )
+
+@require_http_methods(["GET", "DELETE"])
+def detail_shoe(request, id):
+    if request.method == "GET":
+        shoe = Shoes.objects.get(id=id)
+        return JsonResponse(shoe,
+                            encoder=ShoesDetailEncoder,
+                            safe=False)
+    else:
+        count, _ = Shoes.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
