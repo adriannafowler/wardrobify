@@ -16,6 +16,24 @@ function HatsList() {
         getData()
     }, [])
 
+    async function handleClick(e) {
+        const id = e.target.value
+
+        const request = await fetch(`http://localhost:8090/api/hats/${id}/`, {
+            method: "DELETE"
+        })
+
+        const resp = await request.json()
+        console.log(e.target)
+
+        if (resp.deleted) {
+            alert("Item Deleted")
+            window.location.reload(true)
+        } else {
+            alert("Could Not Delete Item")
+        }
+    }
+
     return (
         <table className="table table-striped">
             <thead>
@@ -25,6 +43,7 @@ function HatsList() {
                     <th>Color</th>
                     <th>Picture</th>
                     <th>Location</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +55,7 @@ function HatsList() {
                             <td>{hat.color}</td>
                             <td><img src={hat.picture_url} height="120" /></td>
                             <td>{hat.location.import_href}</td>
-
-
+                            <td><button onClick={handleClick} value={hat.id} id={hat.id} className="btn btn-danger">Delete</button></td>
                         </tr>
                     );
                 })}
