@@ -3,11 +3,28 @@ import { Link } from 'react-router-dom'
 
 
 function ShoeColumn(props) {
+
+    async function handleClick(e) {
+        const id = e.target.value
+        alert(`Delete item?`)
+        const request = await fetch(`http://localhost:8080/shoes/${e.target.id}`, {
+            method: "DELETE"
+        })
+
+        const resp = await request.json()
+
+        if (resp.deleted) {
+            window.location.reload()
+        } else {
+            alert("Could not delete item")
+        }
+    }
+
     return (
         <div className='col'>
             {props.list.map(data => {
                 const shoe = data
-                // console.log(shoe)
+
                 return (
                     <div key={shoe.id} className='card mb-3 shadow'>
                         <img src={shoe.image} className='card-img-top'/>
@@ -19,6 +36,9 @@ function ShoeColumn(props) {
                             <p className="card-text">
                                 {shoe.color}
                             </p>
+                        </div>
+                        <div className='card-footer'>
+                            <button onClick={handleClick} id={shoe.id} className='btn btn-danger'>Delete</button>
                         </div>
                     </div>
                 )
@@ -38,35 +58,20 @@ function ShoeColumn(props) {
                 const response = await fetch(url)
                 if (response.ok) {
                     const data = await response.json()
-                    // console.log(data)
+
                     const requests = []
                     for (let shoe of data.shoes) {
                         const detailUrl = `http://localhost:8080/shoes/${shoe.id}`
-                        // console.log(shoe)
+
                         requests.push(fetch(detailUrl))
                     }
-                    // console.log(data)
-
-                    const responses = await Promise.all(requests)
 
                     const columns = [[], [], [], []]
 
                     data.shoes.forEach((shoe, index) => {
-                        columns[index % 4].push(shoe); // Distribute shoes into columns in a circular manner
+                        columns[index % 4].push(shoe)
                     });
 
-                    // let i = 0
-                    // for (const shoeResponse of responses) {
-                    //     if (shoeResponse.ok) {
-                    //         const details = await shoeResponse.json()
-                    //         columns[i] = i + 1
-                    //         if (i > 3) {
-                    //             i = 0
-                    //         }
-                    //     } else {
-                    //         console.error("shoe response:", shoeResponse)
-                    //     }
-                    // }
                     setShoeColumns(columns)
                 }
             } catch (e) {
