@@ -2,7 +2,7 @@
 
 Team:
 
-* Taylor - Hats Test
+* Taylor - Hats
 * Person 2 - Which microservice?
 
 ## Design
