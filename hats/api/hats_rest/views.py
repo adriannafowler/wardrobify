@@ -21,6 +21,20 @@ class HatsEncoder(ModelEncoder):
         "style_name",
         "color",
         "picture_url",
+        "id",
+        "location",
+    ]
+    encoders = {"location": LocationVOEncoder()}
+
+
+class HatsDetailEncoder(ModelEncoder):
+    model = Hats
+    properties = [
+        "fabric",
+        "style_name",
+        "color",
+        "picture_url",
+        "id",
         "location",
     ]
     encoders = {"location": LocationVOEncoder()}
@@ -42,6 +56,18 @@ def api_list_hats(request, location_vo_id=None):
         )
     else:
         content = json.loads(request.body)
+
+        try:
+            locate = content["location"]
+            location_href = f"/api/locations/{locate}/"
+            location = LocationVO.objects.get(import_href=location_href)
+            content["location"] = location
+        except LocationVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid conference id"},
+                status=400,
+            )
+
         hat = Hats.objects.create(**content)
         return JsonResponse(
             hat,
@@ -49,4 +75,16 @@ def api_list_hats(request, location_vo_id=None):
             safe=False,
         )
 
-# Create your views here.
+
+@require_http_methods(["GET", "DELETE"])
+def api_show_hat(request, pk):
+    if request.method == "GET":
+        hats = Hats.objects.get(id=pk)
+        return JsonResponse(
+            hats,
+            encoder=HatsDetailEncoder,
+            safe=False,
+        )
+    else:
+        count, _ = Hats.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})

@@ -4,6 +4,9 @@ from django.db import models
 class LocationVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
 
+    def __str__(self):
+        return self.import_href
+
 
 class Hats(models.Model):
     fabric = models.CharField(max_length=200)
