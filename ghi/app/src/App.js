@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import ShoesList from './Shoes'
 import Nav from './Nav';
+import HatsList from './HatsList';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/hats" element={<HatsList />} />
           <Route path="/shoes" element={<ShoesList />} />
         </Routes>
       </div>
