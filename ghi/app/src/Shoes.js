@@ -48,7 +48,7 @@ function ShoeColumn(props) {
 }
 
 
-    const ShoesList = (props) => {
+    const ShoesList = () => {
         const [shoeColumns, setShoeColumns] = useState([[], [], [], []])
 
         const fetchData = async () => {

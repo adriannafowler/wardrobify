@@ -50,7 +50,8 @@ def list_shoes(request, bin_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            bin_href = content["bin"]
+            locate = content["bin"]
+            bin_href = f"/api/bins/{locate}/"
             bin = BinVO.objects.get(import_href=bin_href)
             content["bin"] = bin
         except:
