@@ -5,7 +5,9 @@ class BinVO(models.Model):
 
 
 class Shoes(models.Model):
-    name = models.CharField(max_length=250)
+    manufacturer = models.CharField(max_length=250, null=True)
+    model_name = models.CharField(max_length=250, null=True)
+    color = models.CharField(max_length=250, null=True)
     image = models.URLField(null=True)
     bin = models.ForeignKey(
         BinVO,
@@ -14,4 +16,4 @@ class Shoes(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.model_name

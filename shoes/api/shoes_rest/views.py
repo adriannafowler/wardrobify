@@ -15,7 +15,9 @@ class BinVOEncoder(ModelEncoder):
 class ShoesListEncoder(ModelEncoder):
     model = Shoes
     properties = [
-        "name",
+        "manufacturer",
+        "model_name",
+        "color",
         "image",
     ]
     def get_extra_data(self, o):
