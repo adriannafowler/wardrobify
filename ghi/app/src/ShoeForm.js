@@ -46,7 +46,7 @@ function ShoeForm( ) {
                 bin: "",
             })
         } else {
-            console.log("Could NOT add shoe")
+            console.error("Could NOT add shoe")
         }
     }
 

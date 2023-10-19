@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
 
 
 function ShoeColumn(props) {
@@ -74,7 +73,6 @@ const ShoesList = () => {
 
         try {
             const response = await fetch(url)
-            // console.log(response)
             if (response.ok) {
                 const data = await response.json()
 
@@ -90,7 +88,6 @@ const ShoesList = () => {
                 const shoeBin = bins.find(bin => bin.href === shoe.bin)
                 if (shoeBin) {
                     shoe.bin = `${shoeBin.closet_name}`
-                    // console.log(shoe.bin)
                 }
                 columns[index % 4].push(shoe)
                 });
