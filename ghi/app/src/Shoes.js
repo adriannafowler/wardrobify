@@ -54,7 +54,6 @@ function ShoeColumn(props) {
 const ShoesList = () => {
     const [shoeColumns, setShoeColumns] = useState([[], [], [], []])
     const [bins, setBins] = useState([])
-    // const [bin, setBin] = useState("")
 
     const fetchBinsData = async () => {
         const binsUrl = "http://localhost:8100/api/bins"
@@ -75,6 +74,7 @@ const ShoesList = () => {
 
         try {
             const response = await fetch(url)
+            // console.log(response)
             if (response.ok) {
                 const data = await response.json()
 
@@ -89,7 +89,8 @@ const ShoesList = () => {
                 data.shoes.forEach((shoe, index) => {
                 const shoeBin = bins.find(bin => bin.href === shoe.bin)
                 if (shoeBin) {
-                    shoe.bin = `${shoeBin.closet_name} ${shoeBin.bin_number}`
+                    shoe.bin = `${shoeBin.closet_name}`
+                    // console.log(shoe.bin)
                 }
                 columns[index % 4].push(shoe)
                 });
@@ -104,7 +105,7 @@ const ShoesList = () => {
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [bins])
 
     return (
         <>
