@@ -3,9 +3,10 @@ from django.db import models
 
 class LocationVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
+    closet_name = models.CharField(max_length=200, null=True, blank=True,)
 
     def __str__(self):
-        return self.import_href
+        return self.closet_name
 
 
 class Hats(models.Model):

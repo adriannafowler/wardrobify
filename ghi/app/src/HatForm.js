@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 function HatForm() {
     const [locations, setLocations] = useState([])
+    
     const [formData, setFormData] = useState({
         fabric: '',
         style_name: '',
