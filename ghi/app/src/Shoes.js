@@ -19,11 +19,11 @@ function ShoeColumn(props) {
             alert("Could not delete item")
         }
     }
-
     return (
         <div className='col'>
             {props.list.map(data => {
                 const shoe = data
+
 
                 return (
                     <div key={shoe.id} className='card mb-3 shadow'>
@@ -38,6 +38,9 @@ function ShoeColumn(props) {
                             </p>
                         </div>
                         <div className='card-footer'>
+                                <h6 className="card-subtitle mb-2 text-muted">
+                                    {shoe.bin}
+                                </h6>
                             <button onClick={handleClick} id={shoe.id} className='btn btn-danger'>Delete</button>
                         </div>
                     </div>
@@ -48,57 +51,77 @@ function ShoeColumn(props) {
 }
 
 
-    const ShoesList = () => {
-        const [shoeColumns, setShoeColumns] = useState([[], [], [], []])
+const ShoesList = () => {
+    const [shoeColumns, setShoeColumns] = useState([[], [], [], []])
+    const [bins, setBins] = useState([])
+    // const [bin, setBin] = useState("")
 
-        const fetchData = async () => {
-            const url = "http://localhost:8080/shoes/"
+    const fetchBinsData = async () => {
+        const binsUrl = "http://localhost:8100/api/bins"
 
-            try {
-                const response = await fetch(url)
-                if (response.ok) {
-                    const data = await response.json()
-
-                    const requests = []
-                    for (let shoe of data.shoes) {
-                        const detailUrl = `http://localhost:8080/shoes/${shoe.id}`
-
-                        requests.push(fetch(detailUrl))
-                    }
-
-                    const columns = [[], [], [], []]
-
-                    data.shoes.forEach((shoe, index) => {
-                        columns[index % 4].push(shoe)
-                    });
-
-                    setShoeColumns(columns)
-                }
-            } catch (e) {
-                console.error(e)
-            }
+        const binsResponse = await fetch(binsUrl)
+        if (binsResponse.ok) {
+            const binsData = await binsResponse.json()
+            setBins(binsData.bins)
         }
+    }
+    useEffect(() => {
+        fetchBinsData()
+    }, [])
 
-        useEffect(() => {
-            fetchData()
-        }, [])
 
-        return (
-            <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-                <h1 className="display-5 fw-bold">Shoes</h1>
-            </div>
-            <div className="container">
-                <div className="row">
-                {shoeColumns.map((shoeList, index) => {
-                    return (
-                    <ShoeColumn key={index} list={shoeList} />
-                    );
-                })}
-                </div>
-            </div>
-            </>
-        )
+    const fetchData = async () => {
+        const url = "http://localhost:8080/shoes/"
+
+        try {
+            const response = await fetch(url)
+            if (response.ok) {
+                const data = await response.json()
+
+                const requests = []
+                for (let shoe of data.shoes) {
+                    const detailUrl = `http://localhost:8080/shoes/${shoe.id}`
+                    requests.push(fetch(detailUrl))
+                }
+
+                const columns = [[], [], [], []]
+
+                data.shoes.forEach((shoe, index) => {
+                const shoeBin = bins.find(bin => bin.href === shoe.bin)
+                if (shoeBin) {
+                    shoe.bin = `${shoeBin.closet_name} ${shoeBin.bin_number}`
+                }
+                columns[index % 4].push(shoe)
+                });
+
+                setShoeColumns(columns)
+            }
+
+        } catch (e) {
+            console.error(e)
+        }
     }
 
-    export default ShoesList
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    return (
+        <>
+        <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
+            <h1 className="display-5 fw-bold">Shoes</h1>
+        </div>
+        <div className="container">
+            <div className="row">
+            {shoeColumns.map((shoeList, index) => {
+                return (
+                <ShoeColumn key={index} list={shoeList}/>
+                );
+            })}
+            </div>
+        </div>
+        </>
+    )
+}
+
+export default ShoesList
