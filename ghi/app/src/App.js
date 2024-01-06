@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
-import ShoesList from './Shoes'
-import ShoeForm from './ShoeForm';
+import ShoesList from './Shoes/Shoes'
+import ShoeForm from './Shoes/ShoeForm';
 import Nav from './Nav';
-import HatsList from './HatsList';
-import HatForm from './HatForm';
+import HatsList from './Hats/HatsList';
+import HatForm from './Hats/HatForm';
+import Locations from './Storage Locations/locations_list';
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
             <Route index element={<HatsList />} />
             <Route path="new" element={<HatForm />} />
           </Route>
-          <Route path="/shoes" element={<ShoesList />} />
-          <Route path="/shoes/create" element={<ShoeForm />} />
+          <Route path="/storage-locations">
+            <Route index element={<Locations />} />
+            <Route path=":id/" element={<ShoesList  />} />
+          </Route>
+          <Route path="/item/create" element={<ShoeForm />} />
         </Routes>
 
       </div>

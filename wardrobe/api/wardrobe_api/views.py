@@ -25,6 +25,9 @@ class BinEncoder(ModelEncoder):
         "bin_size",
     ]
 
+    def get_extra_data(self, o):
+        return {"image": o.image.url if o.image else None}
+
 
 @require_http_methods(["GET", "POST"])
 def api_locations(request):
@@ -164,6 +167,7 @@ def api_bins(request):
                 "bin_number": the number of the bin,
                 "bin_size": the size of the bin,
                 "href": URL to the bin,
+                "image": image file of storage location (optional),
             },
             ...
         ]
@@ -175,6 +179,7 @@ def api_bins(request):
         "closet_name": bin's closet name,
         "bin_number": the number of the bin,
         "bin_size": the size of the bin,
+        "image": image file of storage location (optional),
     }
     """
     if request.method == "GET":
@@ -207,6 +212,7 @@ def api_bin(request, pk):
         "bin_number": the number of the bin,
         "bin_size": the size of the bin,
         "href": URL to the bin,
+        "image": image file of storage location (optional),
     }
 
     PUT:
@@ -216,6 +222,7 @@ def api_bin(request, pk):
         "closet_name": bin's closet name,
         "bin_number": the number of the bin,
         "bin_size": the size of the bin,
+        "image": image file of storage location (optional),
     }
 
     DELETE:
@@ -249,7 +256,7 @@ def api_bin(request, pk):
             content = json.loads(request.body)
             bin = Bin.objects.get(id=pk)
 
-            props = ["closet_name", "bin_number", "bin_size"]
+            props = ["closet_name", "bin_number", "bin_size", "image"]
             for prop in props:
                 if prop in content:
                     setattr(bin, prop, content[prop])

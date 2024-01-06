@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
+    /* background-color: #1e1e1e; */
+}
+
+#card {
+    margin: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+#card:hover {
+    transform: scale(1.1);
+}
+
+.card-img-top {
+    aspect-ratio: 1/1;
+}

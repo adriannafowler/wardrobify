@@ -1,0 +1,8 @@
+.card .card-footer {
+    display: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.card:hover .card-footer {
+    display: block !important; /* Adding !important to ensure override */
+}

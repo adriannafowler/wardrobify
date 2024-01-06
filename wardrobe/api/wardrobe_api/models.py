@@ -21,6 +21,7 @@ class Bin(models.Model):
     closet_name = models.CharField(max_length=100)
     bin_number = models.PositiveSmallIntegerField()
     bin_size = models.PositiveSmallIntegerField()
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def get_api_url(self):
         return reverse("api_bin", kwargs={"pk": self.pk})
