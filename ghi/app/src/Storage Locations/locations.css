@@ -19,3 +19,31 @@ body {
 .card-img-top {
     aspect-ratio: 1/1;
 }
+
+.preview-container {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 300px;
+    max-height: auto;
+}
+
+#single_crop_container {    width: 600px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preview-img {
+    margin: 5px;
+    max-width: 600px;
+    max-height: 400px;
+    height: auto;
+}
+
+#progress-line {
+    width: 100%;
+    margin: 10px 0;
+}

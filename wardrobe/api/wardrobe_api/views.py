@@ -189,13 +189,31 @@ def api_bins(request):
             encoder=BinEncoder,
         )
     else:
-        content = json.loads(request.body)
-        bin = Bin.objects.create(**content)
-        return JsonResponse(
-            bin,
-            encoder=BinEncoder,
-            safe=False,
-        )
+        if request.content_type == "application/json":
+            content = json.loads(request.body)
+            bin = Bin.objects.create(**content)
+
+        else:
+            closet_name = request.POST.get("closet_name")
+            bin_number = request.POST.get("bin_number")
+            bin_size = request.POST.get("bin_size")
+            image = request.FILES.get("image") if "image" in request.FILES else None
+
+            bin = Bin.objects.create(
+                closet_name=closet_name,
+                bin_number=bin_number,
+                bin_size=bin_size,
+                image=image
+            )
+            
+        response_data = {
+            "id": bin.id,
+            "closet_name": bin.closet_name,
+            "bin_number": bin.bin_number,
+            "bin_size": bin.bin_size,
+            "image": bin.image.url if bin.image else None
+        }
+        return JsonResponse(response_data, status=201)
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])

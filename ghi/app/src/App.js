@@ -6,6 +6,8 @@ import Nav from './Nav';
 import HatsList from './Hats/HatsList';
 import HatForm from './Hats/HatForm';
 import Locations from './Storage Locations/locations_list';
+import StorageLocationForm from './Storage Locations/locations_form';
+import Scratch from './Storage Locations/scratch';
 
 function App() {
   return (
@@ -21,9 +23,12 @@ function App() {
           <Route path="/storage-locations">
             <Route index element={<Locations />} />
             <Route path=":id/" element={<ShoesList  />} />
+            <Route path="new/" element={<StorageLocationForm />} />
           </Route>
           <Route path="/item/create" element={<ShoeForm />} />
+          <Route path="/scratch/" element={<Scratch  />} />
         </Routes>
+
 
       </div>
     </BrowserRouter>
