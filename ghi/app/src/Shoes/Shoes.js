@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import DeleteModal from './delete_modal.js';
 import { useParams} from 'react-router-dom'
+import EditShoeModal from './edit_modal.js'
 import './Shoes.css'
 
 
@@ -12,6 +13,9 @@ const ShoesList = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedShoeId, setSelectedShoeId] = useState(null)
     const [currentBin, setCurrentBin] = useState(null)
+
+    const [editModalShow, setEditModalShow] = useState(false);
+    const [selectedShoeData, setSelectedShoeData] = useState(null);
 
     const param = useParams()
     const locationId = param.id
@@ -86,6 +90,18 @@ const ShoesList = () => {
         handleCloseModal();
     };
 
+    const handleEdit = (shoe) => {
+        setSelectedShoeData(shoe);
+        setEditModalShow(true);
+    };
+
+    const updateShoe = (updatedData) => {
+        // Logic to send the updated data to the server
+        console.log('Updating shoe with', updatedData);
+        // Close the modal after updating
+        setEditModalShow(false);
+    };
+
     return (
         <>
             <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
@@ -109,8 +125,19 @@ const ShoesList = () => {
                                             </p>
                                         </div>
                                         <div className='card-footer'>
+                                            <button onClick={() => handleEdit(item)} className='btn btn-success'>Edit</button>
+                                            <EditShoeModal
+                                                show={editModalShow}
+                                                handleClose={() => setEditModalShow(false)}
+                                                shoeData={selectedShoeData}
+                                                updateShoe={updateShoe}
+                                            />
                                             <button onClick={() => handleDeleteClick(item.id)} id={item.id} className='btn btn-danger'>Delete</button>
-                                            <DeleteModal show={showModal} onClose={handleCloseModal} onDelete={handleDelete} />
+                                            <DeleteModal
+                                                show={showModal}
+                                                onClose={handleCloseModal}
+                                                onDelete={handleDelete}
+                                            />
                                         </div>
                                     </div>
                                 </div>
