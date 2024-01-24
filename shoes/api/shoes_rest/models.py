@@ -8,7 +8,7 @@ class Shoes(models.Model):
     manufacturer = models.CharField(max_length=250, null=True)
     model_name = models.CharField(max_length=250, null=True)
     color = models.CharField(max_length=250, null=True)
-    image = models.URLField(null=True)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
     bin = models.ForeignKey(
         BinVO,
         related_name="shoes",

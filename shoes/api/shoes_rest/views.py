@@ -19,10 +19,12 @@ class ShoesListEncoder(ModelEncoder):
         "manufacturer",
         "model_name",
         "color",
-        "image",
     ]
     def get_extra_data(self, o):
-        return {"bin": o.bin.import_href}
+        return {
+            "bin": o.bin.import_href,
+            "image": o.image.url if o.image else None,
+            }
 
 class ShoesDetailEncoder(ModelEncoder):
     model = Shoes
@@ -34,7 +36,10 @@ class ShoesDetailEncoder(ModelEncoder):
         "image",
     ]
     def get_extra_data(self, o):
-        return {"bin": o.bin.import_href}
+        return {
+            "bin": o.bin.import_href,
+            "image": o.image.url if o.image else None,
+            }
 
 
 @require_http_methods(["GET", "POST"])
@@ -47,24 +52,36 @@ def list_shoes(request, bin_vo_id=None):
             return JsonResponse({"shoes": shoes},
                             encoder=ShoesListEncoder,
                             safe=False)
+
     else:
-        content = json.loads(request.body)
         try:
-            locate = content["bin"]
-            bin_href = f"/api/bins/{locate}/"
-            bin = BinVO.objects.get(import_href=bin_href)
-            content["bin"] = bin
-        except:
-            return JsonResponse(
-                {"message": "Invalid bin id"},
-                status = 400,
+            manufacturer = request.POST.get("manufacturer")
+            model_name = request.POST.get("model_name")
+            color = request.POST.get("color")
+            image = request.FILES.get("image")
+            bin_id = request.POST.get("bin")
+            bin = BinVO.objects.get(id=bin_id)
+
+            shoe = Shoes.objects.create(
+                manufacturer=manufacturer,
+                model_name=model_name,
+                color=color,
+                image=image,
+                bin=bin
             )
-        shoe = Shoes.objects.create(**content)
-        return JsonResponse(
-            shoe,
-            encoder=ShoesListEncoder,
-            safe=False
-        )
+
+            return JsonResponse({
+                "id": shoe.id,
+                "manufacturer": shoe.manufacturer,
+                "model_name": shoe.model_name,
+                "color": shoe.color,
+                "image": shoe.image.url if shoe.image else None,
+                "bin": shoe.bin.import_href
+            }, status=201)
+
+        except BinVO.DoesNotExist:
+            return JsonResponse({"message": "Invalid bin ID or Bin not found"}, status=400)
+
 
 @require_http_methods(["GET", "DELETE"])
 def detail_shoe(request, id):

@@ -8,12 +8,18 @@ import './Shoes.css'
 const ShoesList = () => {
     const [bins, setBins] = useState([])
     const [shoes, setShoes] = useState([])
+    const [filteredShoes, setFilteredShoes] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [selectedShoeId, setSelectedShoeId] = useState(null)
     const [currentBin, setCurrentBin] = useState(null)
 
     const param = useParams()
     const locationId = param.id
+
+    useEffect(() => {
+        const filtered = shoes.filter(item => item.bin === `/api/bins/${locationId}/`);
+        setFilteredShoes(filtered);
+    }, [shoes, locationId]);
 
 
     const fetchBinsData = async () => {
@@ -87,20 +93,19 @@ const ShoesList = () => {
             </div>
             <div className='container text-center'>
                 <div className='row g-2 align-items-center'>
-                    {shoes
-                        .filter(item => item.bin === `/api/bins/${locationId}/`)
+                    {filteredShoes
                         .map((item) => (
                             <div key={item.id} id='item' className='col'>
                                 <div className='d-flex justify-content-center'>
                                     <div className="card h-100" style={{ width: '100%' }}>
-                                        <img src={item.image} className='card-img-top'/>
+                                        <img src={`${process.env.REACT_APP_API_URL}${item.image}`} className='card-img-top'/>
                                         <div className="card-body">
                                             <h5 className="card-title">{item.model_name}</h5>
                                             <h6 className="card-subtitle mb-2 text-muted">
                                                 {item.manufacturer}
                                             </h6>
                                             <p className="card-text">
-                                                {item.color}
+                                                {`${item.bin} ${item.color}`}
                                             </p>
                                         </div>
                                         <div className='card-footer'>

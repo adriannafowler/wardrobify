@@ -88,7 +88,7 @@ function StorageLocationForm( ) {
                         <label htmlFor="closet_name">Location name</label>
                     </div>
                     <div className='form mb-3' id='image-selection-container'>
-                        <label for="formFile" class="form-label">Select Image File</label>
+                        <label htmlFor="formFile" className="form-label">Select Image File</label>
                         <input
                                     type="file"
                                     onChange={handleImageChange}

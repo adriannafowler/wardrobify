@@ -17,6 +17,9 @@ function Nav() {
               <NavLink className="nav-link" to="/storage-locations">Wardrobe</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/storage-locations/new/">Add Wardrobe</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/item/create/">Add Item</NavLink>
             </li>
           </ul>
