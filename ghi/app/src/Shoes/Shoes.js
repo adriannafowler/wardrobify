@@ -114,14 +114,14 @@ const ShoesList = () => {
                             <div key={item.id} id='item' className='col'>
                                 <div className='d-flex justify-content-center'>
                                     <div className="card h-100" style={{ width: '100%' }}>
-                                        <img src={`${process.env.REACT_APP_API_URL}${item.image}`} className='card-img-top'/>
+                                        <img src={`${process.env.REACT_APP_SHOES_URL}${item.image}`} className='card-img-top'/>
                                         <div className="card-body">
                                             <h5 className="card-title">{item.model_name}</h5>
                                             <h6 className="card-subtitle mb-2 text-muted">
                                                 {item.manufacturer}
                                             </h6>
                                             <p className="card-text">
-                                                {`${item.bin} ${item.color}`}
+                                                {`${process.env.REACT_APP_SHOES_URL}${item.image}    ${item.color}`}
                                             </p>
                                         </div>
                                         <div className='card-footer'>
