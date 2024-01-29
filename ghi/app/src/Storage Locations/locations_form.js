@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import './locations.css'
-
+import { useNavigate } from 'react-router-dom';
 
 
 function StorageLocationForm( ) {
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         closet_name: "",
         bin_number: 0,
@@ -52,6 +53,7 @@ function StorageLocationForm( ) {
             });
             setPreviewUrl("");
             setFile(null);
+            navigate(`/storage-locations/`)
         } else {
             console.error("Could NOT add storage location");
         }

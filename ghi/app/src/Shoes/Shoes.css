@@ -6,3 +6,12 @@
 .card:hover .card-footer {
     display: block !important; /* Adding !important to ensure override */
 }
+
+#card-container {
+    width: 300px;
+    height: auto;
+}
+
+#wardrobe-title {
+    color: #A8425C;
+}

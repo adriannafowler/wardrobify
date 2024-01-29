@@ -104,16 +104,16 @@ const ShoesList = () => {
 
     return (
         <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-                <h1 className="display-5 fw-bold">{currentBin ? currentBin.closet_name : 'Items'}</h1>
+            <div className="px-4 py-5 my-5 mt-0 text-center">
+                <h1 className="display-5 fw-bold" id='wardrobe-title'>{currentBin ? currentBin.closet_name : 'Items'} </h1>
             </div>
             <div className='container text-center'>
                 <div className='row g-2 align-items-center'>
                     {filteredShoes
                         .map((item) => (
-                            <div key={item.id} id='item' className='col'>
+                            <div key={item.id} className='col'  >
                                 <div className='d-flex justify-content-center'>
-                                    <div className="card h-100" style={{ width: '100%' }}>
+                                    <div className="card h-100" id='card-container'>
                                         <img src={`${process.env.REACT_APP_SHOES_URL}${item.image}`} className='card-img-top'/>
                                         <div className="card-body">
                                             <h5 className="card-title">{item.model_name}</h5>
@@ -124,15 +124,15 @@ const ShoesList = () => {
                                                 {`${process.env.REACT_APP_SHOES_URL}${item.image}    ${item.color}`}
                                             </p>
                                         </div>
-                                        <div className='card-footer'>
-                                            <button onClick={() => handleEdit(item)} className='btn btn-success'>Edit</button>
+                                        <div className='card-footer' id='card-footer'>
+                                            <button onClick={() => handleEdit(item)} className='btn btn-success m-3'>Edit</button>
                                             <EditShoeModal
                                                 show={editModalShow}
                                                 handleClose={() => setEditModalShow(false)}
                                                 shoeData={selectedShoeData}
                                                 updateShoe={updateShoe}
                                             />
-                                            <button onClick={() => handleDeleteClick(item.id)} id={item.id} className='btn btn-danger'>Delete</button>
+                                            <button onClick={() => handleDeleteClick(item.id)} id={item.id} className='btn btn-danger m-3'>Delete</button>
                                             <DeleteModal
                                                 show={showModal}
                                                 onClose={handleCloseModal}

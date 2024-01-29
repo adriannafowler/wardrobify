@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Scratch() {
+function ShoeForm() {
     const [bins, setBins] = useState([]);
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         manufacturer: "",
         model_name: "",
@@ -67,6 +69,7 @@ function Scratch() {
             });
             setPreviewUrl("");
             setFile(null);
+            navigate(`/storage-locations/${formData.bin}/`)
         } else {
             console.error("Could NOT add shoe");
         }
@@ -129,4 +132,4 @@ function Scratch() {
         );
 }
 
-export default Scratch;
+export default ShoeForm;
