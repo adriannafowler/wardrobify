@@ -14,7 +14,6 @@ const EditShoeModal = ({ show, handleClose, shoeData, updateShoe }) => {
         image: "",
     });
 
-    console.log("Shoe Data:", shoeData)
 
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/bins';
@@ -81,7 +80,6 @@ const EditShoeModal = ({ show, handleClose, shoeData, updateShoe }) => {
 
         if (response.ok) {
             const updatedShoe = await response.json();
-            console.log("Update successful", updatedShoe);
             updateShoe(updatedShoe);
             handleClose();
         } else {

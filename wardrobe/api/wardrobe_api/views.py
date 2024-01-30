@@ -127,7 +127,7 @@ def api_location(request, pk):
             )
         except Location.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             location = Location.objects.get(id=pk)
@@ -205,7 +205,7 @@ def api_bins(request):
                 bin_size=bin_size,
                 image=image
             )
-            
+
         response_data = {
             "id": bin.id,
             "closet_name": bin.closet_name,
@@ -269,7 +269,7 @@ def api_bin(request, pk):
             )
         except Bin.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             bin = Bin.objects.get(id=pk)

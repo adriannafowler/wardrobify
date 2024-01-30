@@ -95,7 +95,6 @@ def detail_shoe(request, id):
                             safe=False)
     elif request.method == "PUT":
         try:
-        # This part assumes the frontend sends the data as FormData
             data = json.loads(request.body)
             shoe.manufacturer = data.get("manufacturer", shoe.manufacturer)
             shoe.model_name = data.get("model_name", shoe.model_name)
@@ -103,8 +102,6 @@ def detail_shoe(request, id):
             bin_id = data.get("bin")
             if bin_id:
                 shoe.bin = get_object_or_404(BinVO, pk=bin_id)
-
-            # Note: Image field is not being updated
 
             shoe.save()
             return JsonResponse(shoe, encoder=ShoesDetailEncoder, safe=False)

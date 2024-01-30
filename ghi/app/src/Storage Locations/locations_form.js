@@ -44,7 +44,6 @@ function StorageLocationForm( ) {
         });
 
         if (response.ok) {
-            console.log("Storage location added successfully");
             setFormData({
                 closet_name: "",
                 bin_number: 0,

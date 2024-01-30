@@ -74,7 +74,6 @@ const ShoesList = () => {
     };
 
     const handleDelete = async () => {
-        // Perform the delete operation
         if (selectedShoeId) {
             const request = await fetch(`http://localhost:8080/shoes/${selectedShoeId}`, {
                 method: "DELETE"
@@ -96,9 +95,6 @@ const ShoesList = () => {
     };
 
     const updateShoe = (updatedData) => {
-        // Logic to send the updated data to the server
-        console.log('Updating shoe with', updatedData);
-        // Close the modal after updating
         setEditModalShow(false);
     };
 

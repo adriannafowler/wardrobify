@@ -59,7 +59,6 @@ function ShoeForm() {
         });
 
         if (response.ok) {
-            console.log(response)
             setFormData({
                 manufacturer: "",
                 model_name: "",
@@ -82,7 +81,6 @@ function ShoeForm() {
         })
     }
 
-    console.log(formData)
 
     return (
         <div className="row">
