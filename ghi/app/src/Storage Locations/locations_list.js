@@ -30,12 +30,12 @@ const Locations = () => {
             <div className='container text-center'>
                 <div className='row g-2 align-items-center'>
                     {bins.map((location) => (
-                        <div className="col" key={location.id} style={{ minWidth: '200px' }} id='card' onClick={() => handleCardClick(location.id)}>
+                        <div className="col" key={location.id} style={{ minWidth: '200px' }} id='card-container' onClick={() => handleCardClick(location.id)}>
                             <div className="d-flex justify-content-center"> {/* Flex container for horizontal centering */}
-                                <div className="card h-100" > {/* Set the width of the card to fill the flex container */}
+                                <div className="card h-100" id='card' > {/* Set the width of the card to fill the flex container */}
                                     <img className="card-img-top" src={`${process.env.REACT_APP_API_URL}${location.image}` || default_closet} alt="Storage location" />
                                     <div className="card-body">
-                                        <p className="card-text">{location.closet_name}</p>
+                                        <p className="card-text" id="card-text">{location.closet_name}</p>
                                     </div>
                                 </div>
                             </div>

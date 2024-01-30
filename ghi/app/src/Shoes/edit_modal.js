@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './Shoes.css'
 
 const EditShoeModal = ({ show, handleClose, shoeData, updateShoe }) => {
     const [bins, setBins] = useState([]);
@@ -92,7 +93,7 @@ const EditShoeModal = ({ show, handleClose, shoeData, updateShoe }) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Item</Modal.Title>
+                <Modal.Title id="form-title">Edit Item</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form
@@ -147,7 +148,7 @@ const EditShoeModal = ({ show, handleClose, shoeData, updateShoe }) => {
                                 })}
                         </Form.Select>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" id='save-btn'>
                         Save Changes
                     </Button>
                 </Form>

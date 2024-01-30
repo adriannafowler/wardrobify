@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Monsterrat';
+    src: url(Montserrat.ttf);
+}
+
+
 #main-logo {
     width: 700px;
     height: auto;
@@ -10,4 +16,9 @@
 
 #title {
     color: #A8425C;
+    font-family: 'Monsterrat';
+}
+
+.nav-link {
+    font-family: 'Monsterrat';
 }

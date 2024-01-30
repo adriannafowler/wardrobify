@@ -11,8 +11,7 @@ function DeleteModal({ show, onClose, onDelete }) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">DELETE</h5>
-                        <button type="button" className="close" onClick={onClose} aria-label="Close">
-                            <img src={x} alt="Close" />
+                        <button type="button" className="btn-close" onClick={onClose} aria-label="Close">
                         </button>
                     </div>
                     <div className="modal-body">

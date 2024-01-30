@@ -88,7 +88,7 @@ function ShoeForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                <h1>Add a new item</h1>
+                <h1 id='form-title'>Add a new item</h1>
                 <form onSubmit={handleSubmit} id="create-shoe-form" encType="multipart/form-data">
                     <div className="form-floating mb-3">
                         <input onChange={handleFormInput} value={formData.manufacturer} placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control"/>
@@ -124,7 +124,7 @@ function ShoeForm() {
                             />
                         {previewUrl && <img src={previewUrl} alt="Preview" id="image" />}
                     </div>
-                    <button className="btn btn-primary">Create</button>
+                    <button className="btn btn-primary" id="add-btn">Create</button>
                 </form>
                 </div>
             </div>

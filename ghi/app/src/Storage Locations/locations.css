@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Monsterrat';
+    src: url(../Montserrat.ttf);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -7,13 +12,17 @@ body {
     /* background-color: #1e1e1e; */
 }
 
-#card {
+#card-container {
     margin: 20px;
     transition: all 0.3s ease-in-out;
 }
 
-#card:hover {
+#card-container:hover {
     transform: scale(1.1);
+}
+
+#card {
+    border-color: #efc8d1;
 }
 
 .card-img-top {
@@ -46,4 +55,18 @@ img {
 #progress-line {
     width: 100%;
     margin: 10px 0;
+}
+
+#add-btn {
+    background-color: #E19FAE;
+    border: #E19FAE;
+}
+
+#form-title {
+    color: #A8425C;
+}
+
+#card-text {
+    font-family: 'Monsterrat';
+    color: #A8425C
 }

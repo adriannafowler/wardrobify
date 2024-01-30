@@ -71,7 +71,7 @@ function StorageLocationForm( ) {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                <h1>Add a new storage location</h1>
+                <h1 id="form-title">Add a new storage location</h1>
                 <form
                     onSubmit={handleSubmit}
                     id="create-location-form"
@@ -99,7 +99,7 @@ function StorageLocationForm( ) {
                                 />
                                 {previewUrl && <img src={previewUrl} alt="Preview" />}
                     </div>
-                    <button className="btn btn-primary">Add</button>
+                    <button className="btn btn-primary" id='add-btn'>Add</button>
                 </form>
                 </div>
             </div>

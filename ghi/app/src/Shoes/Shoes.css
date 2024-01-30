@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Monsterrat';
+    src: url(../Montserrat.ttf);
+}
+
+
 .card .card-footer {
     display: none !important;
     transition: all 0.3s ease !important;
@@ -10,8 +16,30 @@
 #card-container {
     width: 300px;
     height: auto;
+    border-color: #efc8d1;
 }
 
 #wardrobe-title {
+    color: #A8425C;
+    font-family: 'Monsterrat';
+    font-weight: lighter;
+}
+
+#card-body  {
+    font-family: 'Monsterrat';
+    color: #A8425C;
+}
+
+#add-btn {
+    background-color: #E19FAE;
+    border: #E19FAE;
+}
+
+#save-btn {
+    background-color: #E19FAE;
+    border: #E19FAE;
+}
+
+#form-title {
     color: #A8425C;
 }
